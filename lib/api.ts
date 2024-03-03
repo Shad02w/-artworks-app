@@ -1,7 +1,5 @@
-import { CircleDollarSign } from "lucide-react"
 import { $fetch } from "./$fetch"
 import { merge } from "lodash-es"
-import { clear } from "console"
 
 const API_BASE = "https://api.artic.edu/api/v1"
 
