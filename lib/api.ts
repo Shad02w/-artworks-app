@@ -80,18 +80,6 @@ export async function fetchArtworks(page = 1, title?: string, categoryTerms?: Re
     return $fetch(`${API_BASE}/artworks/search?&fields=id,image_id,title,thumbnail&from=${(page - 1) * 10}&size=10${params}`)
 }
 
-export interface GetAllCategoryResponse {
-    pagination: Pagination
-    data: Array<{
-        id: string
-        title: string
-    }>
-}
-
-export async function fetchCategories(): Promise<GetAllCategoryResponse> {
-    return await $fetch(`${API_BASE}/category-terms?fields=id,title`)
-}
-
 export interface Category {
     id: string
     title: string
