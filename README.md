@@ -1,6 +1,20 @@
 # Artworks App
 
-This application is built using Next.js and Tailwind CSS based on  [Art Institute of Chicago API](https://api.artic.edu/docs/) 
+This application is built using Next.js, Tailwind CSS, zustand and Shadcn and  [Art Institute of Chicago API](https://api.artic.edu/docs/) 
+
+[Live Demo](https://artworks-app-six.vercel.app/) at vercel
+
+## Features
+
+- Used SSR to achieved great SEO performance in specific page, prevented layout shift during image loading.
+
+- Created Inifinite scroll list for artworks view, autoload artworks when user reaching bottom of the screen. It is more intuitive experience for mobile
+
+- Fully Responsive, from layout to images
+
+- Provided great user experiences for viewing artworks' images
+
+- All the reusable UI components are grouped into `components` directory for maintainability. All the componenst with businesses logics are placed under `app` directory and organized using Routes Group
 
 ## Getting Started
 
@@ -17,19 +31,5 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-
-
-## Features
-
-- Used SSR to achieved great SEO performance, and prevent Layout Shift during image loading. About to 
-
-- Created Inifinite Scroll List to display artworks, autoload artworks when reaching bottom of the screen. It is more
-
-- Fully Responsive, from layout to images
-
-- Provided great user experiences for viewing artworks' images
-
-- All the reusable UI components is grouped to `components` directory for maintainability. All the component with businese logics are placed under `app` directory and organized using Routes Group
 
 ## 
