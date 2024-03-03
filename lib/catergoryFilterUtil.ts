@@ -24,14 +24,14 @@ function removeFilter(searchParam: URLSearchParams, subtype: CategorySubtype, id
 }
 
 function getSubtypeId(subtype: CategorySubtype): string {
-    return subtype + "_id"
+    return subtype + "_ids"
 }
 
 function getfilterMap(searchParam: URLSearchParams): CategoryFilterMap {
     const result: CategoryFilterMap = {}
 
     catergoryFilterUtil.subtypes.forEach(subtype => {
-        result[subtype] = searchParam.get(subtype + "_id")?.split(",") ?? []
+        result[subtype] = searchParam.get(subtype + "_ids")?.split(",") ?? []
     })
 
     return result

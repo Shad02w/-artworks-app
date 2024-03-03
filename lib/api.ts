@@ -70,7 +70,7 @@ export async function fetchArtworks(page = 1, title?: string, categoryTerms?: Re
         if (value.length > 0) {
             must.push({
                 terms: {
-                    [key + "_id"]: value
+                    [key + "_ids"]: value
                 }
             })
         }

@@ -61,13 +61,8 @@ export function Filter() {
 
     useEffect(() => {
         const params = new URLSearchParams(searchParams.toString())
-        const result: CategoryFilterMap = {}
 
-        catergoryFilterUtil.subtypes.forEach(subtype => {
-            result[subtype] = params.get(subtype + "_id")?.split(",") ?? []
-        })
-
-        setFilterMap(result)
+        setFilterMap(catergoryFilterUtil.getfilterMap(params))
     }, [searchParams])
 
     return (
