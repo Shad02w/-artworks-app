@@ -7,6 +7,7 @@ export async function $fetch<T>(input: string | URL | globalThis.Request, init?:
         case 204:
             break
         case 404:
+            // jump to 404 page
             notFound()
         default:
             throw new APIError()

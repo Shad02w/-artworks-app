@@ -26,12 +26,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - Created Inifinite Scroll List to display artworks, autoload artworks when reaching bottom of the screen. It is more
 
-- Fully Responsive
+- Fully Responsive, from layout to images
 
 - Provided great user experiences for viewing artworks' images
 
 - All the reusable UI components is grouped to `components` directory for maintainability. All the component with businese logics are placed under `app` directory and organized using Routes Group
-
-- 
 
 ## 

@@ -1,6 +1,5 @@
 import "./globals.css"
 import "react-photo-view/dist/react-photo-view.css"
-import { Inter } from "next/font/google"
 import { Rosario } from "next/font/google"
 import type { Metadata, Viewport } from "next"
 
