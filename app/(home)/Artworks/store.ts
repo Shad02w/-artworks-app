@@ -23,7 +23,7 @@ export const useArtworkListStore = create<ArtworkListStore>((set, get) => ({
         set(state => ({ artworks: [...state.artworks, ...res.data], status: "success", page: get().page + 1, pagination: res.pagination }))
     },
     refresh: async (title?: string) => {
-        if (title === get().title) return
+        if (title === get().title && get().pagination !== null) return
         set({ status: "loading" })
         const res = await fetchArtworks(1, title)
         set({ artworks: res.data, status: "success", page: 1, pagination: res.pagination, title })
