@@ -10,7 +10,11 @@ import { useArtworkListStore } from "./Artworks/store"
  * 4. create a comment form to demonstrate data validation
  * 5. document design decisions
  */
-export default async function Home({ searchParams: { title, category } }: { searchParams: { title: string; category: string } }) {
+export default async function Home({
+    searchParams: { title, classification_id }
+}: {
+    searchParams: { title: string; classification_id: string }
+}) {
     const artworks = await fetchArtworks(1, title)
 
     return <Artworks initial={artworks} title={title} />

@@ -48,7 +48,6 @@ export interface SearchArtworksResponse {
     }>
 }
 
-// TODO: I have difficulty finding the api to get the categories of the artworks 😭
 export async function fetchArtworks(page = 1, title?: string, category?: string): Promise<SearchArtworksResponse> {
     function encodeQueryData(object: any) {
         // Convert the JSON object to a string
@@ -83,4 +82,36 @@ export interface GetAllCategoryResponse {
 
 export async function fetchCategories(): Promise<GetAllCategoryResponse> {
     return await $fetch(`${API_BASE}/category-terms?fields=id,title`)
+}
+
+export interface Category {
+    id: string
+    title: string
+    subtype: CategorySubtype
+}
+
+export type CategorySubtype = "classification" | "material" | "technique" | "style" | "subject" | "department" | "theme"
+
+export interface SearchCategoryTermRequest {
+    title?: string
+}
+
+export interface SearchCategoryTermResponse {
+    pagination: Pagination
+    data: Category[]
+}
+
+export async function searchCategoryTerm({ title }: SearchCategoryTermRequest): Promise<SearchCategoryTermResponse> {
+    const query = {}
+    if (title) {
+        merge(query, {
+            query: {
+                match: {
+                    title: title
+                }
+            }
+        })
+    }
+
+    return $fetch(`${API_BASE}/category-terms/search?fields=id,title,subtype&size=10&params=${encodeURIComponent(JSON.stringify(query))}`)
 }
