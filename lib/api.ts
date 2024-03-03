@@ -1,5 +1,7 @@
+import { CircleDollarSign } from "lucide-react"
 import { $fetch } from "./$fetch"
 import { merge } from "lodash-es"
+import { clear } from "console"
 
 const API_BASE = "https://api.artic.edu/api/v1"
 
@@ -48,27 +50,35 @@ export interface SearchArtworksResponse {
     }>
 }
 
-export async function fetchArtworks(page = 1, title?: string, category?: string): Promise<SearchArtworksResponse> {
-    function encodeQueryData(object: any) {
-        // Convert the JSON object to a string
-        const jsonString = JSON.stringify(object)
-
-        // Encode the JSON string to make it URL-safe
-        return encodeURIComponent(jsonString)
+export async function fetchArtworks(page = 1, title?: string, categoryTerms?: Record<string, string[]>): Promise<SearchArtworksResponse> {
+    const must: any[] = []
+    const query = {
+        query: {
+            bool: {
+                must
+            }
+        }
     }
 
-    const query = {}
     if (title) {
-        merge(query, {
-            query: {
-                match: {
-                    title: title
-                }
+        must.push({
+            match: {
+                title
             }
         })
     }
 
-    const params = `&params=${encodeQueryData(query)}`
+    for (const [key, value] of Object.entries(categoryTerms ?? {})) {
+        if (value.length > 0) {
+            must.push({
+                terms: {
+                    [key + "_id"]: value
+                }
+            })
+        }
+    }
+
+    const params = `&params=${encodeURIComponent(JSON.stringify(query))}`
     return $fetch(`${API_BASE}/artworks/search?&fields=id,image_id,title,thumbnail&from=${(page - 1) * 10}&size=10${params}`)
 }
 

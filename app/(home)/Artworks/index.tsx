@@ -5,21 +5,24 @@ import { useEffect, useMemo } from "react"
 import { EmptyPlaceholder } from "./EmptyPlaceholder"
 import { ScrollList } from "./ScrollList"
 import { useArtworkListStore } from "./store"
-import type { SearchArtworksResponse } from "@/lib/api"
+import { useSearchParams } from "next/navigation"
+import { catergoryFilterUtil } from "@/lib/catergoryFilterUtil"
 
-interface Props {
-    initial: SearchArtworksResponse
-    title?: string
-}
-
-export function Artworks({ title }: Props) {
+export function Artworks() {
     const { artworks, page, status, pagination, fetchNextPage, refresh } = useArtworkListStore()
 
     const allLoaded = useMemo(() => pagination?.total_pages === page, [pagination, page])
+    const searchParams = useSearchParams()
+
+    const title = useMemo(() => searchParams.get("title") ?? undefined, [searchParams])
+
+    const catergoryfilterMap = useMemo(() => {
+        return catergoryFilterUtil.getfilterMap(searchParams)
+    }, [searchParams])
 
     useEffect(() => {
-        refresh(title)
-    }, [refresh, title])
+        refresh(title, catergoryfilterMap)
+    }, [refresh, title, catergoryfilterMap])
 
     return (
         <div className="h-full">

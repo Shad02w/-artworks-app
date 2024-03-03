@@ -1,19 +1,16 @@
 "use client"
+
 import { Checkbox } from "@/components/Checkbox"
 import { Input } from "@/components/Input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/Popover"
-import { searchCategoryTerm, type Category, type CategorySubtype } from "@/lib/api"
-import { catergoryFilterUtil } from "@/lib/catergoryFilterUtil"
+import { searchCategoryTerm, type Category } from "@/lib/api"
+import { catergoryFilterUtil, type CategoryFilterMap } from "@/lib/catergoryFilterUtil"
 import { useDebounce } from "@/lib/hooks"
 import type { CheckedState } from "@radix-ui/react-checkbox"
 import { Filter as FilterIcon } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { create } from "zustand"
-
-const subtypes: CategorySubtype[] = ["classification", "material", "technique", "style", "subject", "department", "theme"]
-
-type CategoryFilterMap = Partial<Record<CategorySubtype, string[]>>
 
 interface FilterStore {
     categories: Category[]
@@ -60,14 +57,13 @@ export function Filter() {
         }
 
         router.replace(`${pathname}?${params.toString()}`)
-        console.log(checkedState)
     }
 
     useEffect(() => {
         const params = new URLSearchParams(searchParams.toString())
         const result: CategoryFilterMap = {}
 
-        subtypes.forEach(subtype => {
+        catergoryFilterUtil.subtypes.forEach(subtype => {
             result[subtype] = params.get(subtype + "_id")?.split(",") ?? []
         })
 
