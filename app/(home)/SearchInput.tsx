@@ -1,7 +1,7 @@
 "use client"
 
 import { useDebounce } from "@/lib/hooks"
-import { tw } from "@/lib/tw"
+import { cn } from "@/lib/cn"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import { useState } from "react"
 
@@ -34,7 +34,7 @@ export function SearchInput({ className }: Props) {
 
     return (
         <input
-            className={tw("h-12 w-full rounded-md bg-gray-100 p-2 outline-none", className)}
+            className={cn("h-12 w-full rounded-md bg-gray-100 p-2 outline-none", className)}
             type="text"
             value={value}
             onChange={handleChange}

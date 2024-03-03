@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react"
-import { tw } from "@/lib/tw"
+import { cn } from "@/lib/cn"
 
 interface Props {
     value: string
@@ -10,7 +10,7 @@ interface Props {
 
 export function Select({ className, options, value, onChange }: Props) {
     return (
-        <div className={tw("relative flex flex-row items-center", className)}>
+        <div className={cn("relative flex flex-row items-center", className)}>
             <span className="mr-2 flex flex-row items-center">
                 <ChevronDown className="h-5" /> {value}
             </span>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { tw } from "@/lib/tw"
+import { cn } from "@/lib/cn"
 
 interface Props {
     children: React.ReactNode
@@ -26,7 +26,7 @@ export function InfiniteScroller({ className, onNextPage, children }: Props) {
     }, [])
 
     return (
-        <div className={tw("relative", className)}>
+        <div className={cn("relative", className)}>
             {children}
             <div ref={ref} className="absolute bottom-[300px] h-[1px] w-full"></div>
         </div>
