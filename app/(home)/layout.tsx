@@ -1,6 +1,5 @@
 import { Suspense } from "react"
 import { SearchInput } from "./SearchInput"
-import { CategorySelect } from "./CategorySelect"
 import { Filter } from "./Filter"
 
 export default function layout({ children }: { children: React.ReactNode }) {
