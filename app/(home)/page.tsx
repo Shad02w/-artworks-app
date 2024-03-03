@@ -1,5 +1,6 @@
 import { Artworks } from "./Artworks"
 import { fetchArtworks } from "@/lib/api"
+import { useArtworkListStore } from "./Artworks/store"
 
 /**
  * The requirements
