@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { Artworks } from "./Artworks"
 
 /**
@@ -9,5 +10,9 @@ import { Artworks } from "./Artworks"
  * 5. document design decisions
  */
 export default async function Home() {
-    return <Artworks />
+    return (
+        <Suspense>
+            <Artworks />
+        </Suspense>
+    )
 }
