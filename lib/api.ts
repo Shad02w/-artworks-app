@@ -88,6 +88,15 @@ export interface Category {
 
 export type CategorySubtype = "classification" | "material" | "technique" | "style" | "subject" | "department" | "theme"
 
+interface BatchFetchCategoriesResponse {
+    pagination: Pagination
+    data: Category[]
+}
+
+export function batchFetchCategories(ids: string[]): Promise<BatchFetchCategoriesResponse> {
+    return $fetch(`${API_BASE}/category-terms?ids=${ids.join(",")}&fields=id,title,subtype`)
+}
+
 export interface SearchCategoryTermRequest {
     title?: string
 }
