@@ -33,7 +33,7 @@ export function List({ paramKey }: Props) {
                         key={artwork.id}
                         className="relative mb-4 overflow-hidden rounded-2xl bg-black transition-transform duration-300 hover:scale-105 md:mb-0"
                     >
-                        <Link className="block h-full" href={`/artworks/${artwork.id}`} prefetch={false}>
+                        <Link className="block h-full" href={`/artworks/${artwork.id}`}>
                             <div className="relative h-80 w-full overflow-hidden">
                                 {artwork.image_id ? (
                                     <Thumbnail

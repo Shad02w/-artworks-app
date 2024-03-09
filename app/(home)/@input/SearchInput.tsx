@@ -19,7 +19,7 @@ export function SearchInput({ className, keyword = "", paramKey }: Props) {
     const router = useRouter()
     const pathname = usePathname()
     const [value, setValue] = useState(keyword)
-    const { isFetching } = useInfiniteArtworksQuery(paramKey)
+    const { isFetching, isFetchingNextPage } = useInfiniteArtworksQuery(paramKey)
 
     const updateSearchParam = useDebounce((value: string) => {
         const params = new URLSearchParams(window.location.search)
@@ -49,7 +49,7 @@ export function SearchInput({ className, keyword = "", paramKey }: Props) {
                 onChange={handleChange}
                 placeholder="Search by artwork title"
             />
-            {isFetching && (
+            {isFetching && !isFetchingNextPage && (
                 <div className="absolute right-0 top-0 flex h-full items-center p-2">
                     <Loader2 className="animate-spin stroke-gray-300" />
                 </div>
