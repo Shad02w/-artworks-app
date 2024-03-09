@@ -16,6 +16,7 @@ export default async function Artwork({ params: { id } }: { params: { id: string
                             alt={data.thumbnail?.alt_text ?? data.title}
                             thumbnail={data.thumbnail}
                             enablePreview
+                            sizes="100vw"
                         />
                     ) : (
                         <NoImage />

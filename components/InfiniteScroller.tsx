@@ -30,7 +30,7 @@ export function InfiniteScroller({ className, onNextPage, children }: Props) {
     return (
         <div className={cn("relative", className)}>
             {children}
-            <div ref={ref} className="absolute bottom-[300px] h-[1px] w-full"></div>
+            <div ref={ref} className="absolute bottom-[400px] h-[1px] w-full"></div>
         </div>
     )
 }

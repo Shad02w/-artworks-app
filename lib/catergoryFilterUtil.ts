@@ -30,7 +30,7 @@ function getSubtypeId(subtype: CategorySubtype): string {
 function getfilterMap(searchParam: URLSearchParams): CategoryFilterMap {
     const result: CategoryFilterMap = {}
 
-    catergoryFilterUtil.subtypes.forEach(subtype => {
+    categoryFilterUtil.subtypes.forEach(subtype => {
         result[subtype] = searchParam.get(subtype + "_ids")?.split(",") ?? []
     })
 
@@ -39,7 +39,7 @@ function getfilterMap(searchParam: URLSearchParams): CategoryFilterMap {
 
 const subtypes: CategorySubtype[] = ["classification", "material", "technique", "style", "subject", "department", "theme"]
 
-export const catergoryFilterUtil = {
+export const categoryFilterUtil = {
     subtypes,
     getSubtypeId,
     listFilters,

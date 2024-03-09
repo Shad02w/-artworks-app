@@ -1,7 +1,7 @@
 "use client"
 
 import type { Category } from "@/lib/api"
-import { catergoryFilterUtil } from "@/lib/catergoryFilterUtil"
+import { categoryFilterUtil } from "@/lib/catergoryFilterUtil"
 import { X } from "lucide-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
@@ -14,7 +14,7 @@ export function Tag({ category: { title, id, subtype } }: Props) {
     const pathname = usePathname()
     const handleTagRemove = () => {
         const searchParams = new URLSearchParams(readonlySearchParams.toString())
-        catergoryFilterUtil.removeFilter(searchParams, subtype, id)
+        categoryFilterUtil.removeFilter(searchParams, subtype, id)
         router.replace(`${pathname}?${searchParams.toString()}`)
     }
 

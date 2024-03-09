@@ -1,7 +1,6 @@
 "use client"
 
-import Image from "next/image"
-import { useState } from "react"
+import Image, { type ImageProps } from "next/image"
 import type { Thumbnail } from "@/lib/api"
 import { PhotoProvider, PhotoView } from "react-photo-view"
 
@@ -10,20 +9,22 @@ export interface Props {
     alt: string
     thumbnail: Thumbnail | null
     enablePreview?: boolean
+    sizes: string
 }
 
-export function Thumbnail({ imageId, alt, thumbnail, enablePreview = false }: Props) {
-    const [loaded, setLoaded] = useState(false)
-
+export function Thumbnail({ imageId, alt, thumbnail, enablePreview = false, sizes }: Props) {
     const src = `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`
+    const placeholder = thumbnail?.lqip as ImageProps["placeholder"] | undefined
+
+    const width = thumbnail?.width && thumbnail?.width < 843 ? thumbnail.width : 843
+
     const image = (
         <Image
-            className="object-cover"
+            className="object-cover object-top"
             fill
-            priority
-            onLoad={() => setLoaded(true)}
-            sizes="(max-width: 640px) 100vw, 640px"
-            src={`https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`}
+            placeholder={placeholder}
+            sizes={sizes}
+            src={`https://www.artic.edu/iiif/2/${imageId}/full/${width},/0/default.jpg`}
             alt={alt}
         />
     )
@@ -35,10 +36,6 @@ export function Thumbnail({ imageId, alt, thumbnail, enablePreview = false }: Pr
                 </PhotoProvider>
             ) : (
                 image
-            )}
-            {thumbnail?.lqip && !loaded && (
-                // eslint-disable-next-line @next/next/no-img-element -- for image optimization
-                <img src={thumbnail?.lqip} className=" absolute left-0 top-0 h-full w-full" alt={thumbnail.alt_text ?? "thumbnail"} />
             )}
         </div>
     )

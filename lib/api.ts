@@ -38,6 +38,12 @@ export async function fetchArtwork(id: string): Promise<GetArtworkResponse> {
     )
 }
 
+export interface SearchArtworksRequest {
+    page?: number
+    title?: string
+    categoryTerms?: Record<string, string[]>
+}
+
 export interface SearchArtworksResponse {
     pagination: Pagination
     data: Array<{
@@ -48,7 +54,7 @@ export interface SearchArtworksResponse {
     }>
 }
 
-export async function fetchArtworks(page = 1, title?: string, categoryTerms?: Record<string, string[]>): Promise<SearchArtworksResponse> {
+export async function fetchArtworks({ title, page = 1, categoryTerms }: SearchArtworksRequest): Promise<SearchArtworksResponse> {
     const must: any[] = []
     const query = {
         query: {
@@ -77,7 +83,7 @@ export async function fetchArtworks(page = 1, title?: string, categoryTerms?: Re
     }
 
     const params = `&params=${encodeURIComponent(JSON.stringify(query))}`
-    return $fetch(`${API_BASE}/artworks/search?&fields=id,image_id,title,thumbnail&from=${(page - 1) * 10}&size=10${params}`)
+    return $fetch(`${API_BASE}/artworks/search?fields=id,image_id,title,thumbnail&from=${(page - 1) * 20}&size=20&${params}`)
 }
 
 export interface Category {

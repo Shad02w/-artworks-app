@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/Checkbox"
 import { Input } from "@/components/Input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/Popover"
 import { searchCategoryTerm, type Category } from "@/lib/api"
-import { catergoryFilterUtil, type CategoryFilterMap } from "@/lib/catergoryFilterUtil"
+import { categoryFilterUtil, type CategoryFilterMap } from "@/lib/catergoryFilterUtil"
 import { useDebounce } from "@/lib/hooks"
 import type { CheckedState } from "@radix-ui/react-checkbox"
 import { Filter as FilterIcon } from "lucide-react"
@@ -51,9 +51,9 @@ export function Filter() {
         const params = new URLSearchParams(searchParams.toString())
 
         if (checkedState) {
-            catergoryFilterUtil.addFilter(params, category.subtype, category.id)
+            categoryFilterUtil.addFilter(params, category.subtype, category.id)
         } else {
-            catergoryFilterUtil.removeFilter(params, category.subtype, category.id)
+            categoryFilterUtil.removeFilter(params, category.subtype, category.id)
         }
 
         router.replace(`${pathname}?${params.toString()}`)
@@ -62,7 +62,7 @@ export function Filter() {
     useEffect(() => {
         const params = new URLSearchParams(searchParams.toString())
 
-        setFilterMap(catergoryFilterUtil.getfilterMap(params))
+        setFilterMap(categoryFilterUtil.getfilterMap(params))
     }, [searchParams])
 
     return (

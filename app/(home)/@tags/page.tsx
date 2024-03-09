@@ -1,10 +1,10 @@
 import { batchFetchCategories, type Category, type CategorySubtype } from "@/lib/api"
-import { catergoryFilterUtil } from "@/lib/catergoryFilterUtil"
+import { categoryFilterUtil } from "@/lib/catergoryFilterUtil"
 import { Suspense } from "react"
 import { Tag } from "./Tag"
 
 export default async function Tags({ searchParams }: { searchParams: any }) {
-    const filters = catergoryFilterUtil.getfilterMap(new URLSearchParams(searchParams))
+    const filters = categoryFilterUtil.getfilterMap(new URLSearchParams(searchParams))
 
     const filterTags: { subtype: CategorySubtype; id: string }[] = []
 
