@@ -1,5 +1,4 @@
 import { $fetch } from "./$fetch"
-import { merge } from "lodash-es"
 
 const API_BASE = "https://api.artic.edu/api/v1"
 
@@ -113,16 +112,7 @@ export interface SearchCategoryTermResponse {
 }
 
 export async function searchCategoryTerm({ title }: SearchCategoryTermRequest): Promise<SearchCategoryTermResponse> {
-    const query = {}
-    if (title) {
-        merge(query, {
-            query: {
-                match: {
-                    title: title
-                }
-            }
-        })
-    }
+    const param = title ? `&query=${encodeURIComponent(JSON.stringify({ query: { match: { title } } }))}` : ""
 
-    return $fetch(`${API_BASE}/category-terms/search?fields=id,title,subtype&size=10&params=${encodeURIComponent(JSON.stringify(query))}`)
+    return $fetch(`${API_BASE}/category-terms/search?fields=id,title,subtype&size=10${param}`)
 }
