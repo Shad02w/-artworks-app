@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { keepPreviousData, useInfiniteQuery } from "@tanstack/react-query"
 import { categoryFilterUtil } from "./catergoryFilterUtil"
 import { fetchArtworks } from "./api"
 
@@ -13,6 +13,7 @@ export function useInfiniteArtworksQuery(paramKey: string) {
         initialPageParam: 1,
         getNextPageParam: ({ pagination: { current_page, total_pages } }) => {
             return current_page < total_pages ? current_page + 1 : null
-        }
+        },
+        placeholderData: keepPreviousData
     })
 }

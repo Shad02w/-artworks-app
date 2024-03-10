@@ -37,9 +37,13 @@ export function CategoryFilter({ paramKey }: Props) {
             categoryFilterUtil.removeFilter(params, category.subtype, category.id)
         }
 
-        setFilterMap(categoryFilterUtil.getfilterMap(params))
+        setFilterMap(categoryFilterUtil.getfilterMap(searchParams))
         router.replace(`${pathname}?${params.toString()}`)
     }
+
+    useEffect(() => {
+        setFilterMap(categoryFilterUtil.getfilterMap(searchParams))
+    }, [searchParams])
 
     return (
         <Popover>
