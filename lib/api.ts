@@ -112,7 +112,10 @@ export interface SearchCategoryTermResponse {
 }
 
 export async function searchCategoryTerm({ title }: SearchCategoryTermRequest): Promise<SearchCategoryTermResponse> {
-    const param = title ? `&query=${encodeURIComponent(JSON.stringify({ query: { match: { title } } }))}` : ""
+    const param = title ? `&params=${encodeURIComponent(JSON.stringify({ query: { match: { title } } }))}` : ""
 
-    return $fetch(`${API_BASE}/category-terms/search?fields=id,title,subtype&size=10${param}`)
+    const res = await $fetch(`${API_BASE}/category-terms/search?fields=id,title,subtype&size=10${param}`)
+    console.log(res)
+
+    return res as any
 }
