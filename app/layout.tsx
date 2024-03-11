@@ -1,9 +1,11 @@
 import "./globals.css"
 import "react-photo-view/dist/react-photo-view.css"
 import { Rosario } from "next/font/google"
-import type { Metadata, Viewport } from "next"
 import { ErrorBoundary } from "@/components/ErrorBoundary"
 import { Provider } from "./provider"
+import { Progress } from "./progress"
+import { Suspense } from "react"
+import type { Metadata, Viewport } from "next"
 
 const rosario = Rosario({ subsets: ["latin"] })
 
@@ -27,7 +29,12 @@ export default function RootLayout({
         <html lang="en">
             <body className={rosario.className}>
                 <Provider>
-                    <ErrorBoundary fallback={<p>Application is down</p>}>{children}</ErrorBoundary>
+                    <ErrorBoundary fallback={<p>Application is down</p>}>
+                        <Suspense>
+                            <Progress />
+                        </Suspense>
+                        {children}
+                    </ErrorBoundary>
                 </Provider>
             </body>
         </html>
